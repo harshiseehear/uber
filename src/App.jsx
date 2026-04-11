@@ -267,9 +267,10 @@ function App() {
       {step === 'welcome' && (
         <section className={`screen welcome-screen ${isFadingOut ? 'fade-out' : 'fade-in'}`}>
           <div className="welcome-content">
-            <h1 className="uber-logo">Uber<br />Eats</h1>
+            <h1 className="uber-logo"><span className="uber-text">Uber</span><br /><span className="eats-text">Eats</span></h1>
             <p className="welcome-tagline">
-              Réponds aux questions.<br />
+              Réponds aux<br />
+              questions.<br />
               Gagne presque<br />
               presque tout.
             </p>
@@ -341,7 +342,7 @@ function App() {
             })}
           </div>
           <button className="submit-arrow" onClick={handleResultsSubmit}>
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </button>
