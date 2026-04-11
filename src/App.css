@@ -1,22 +1,41 @@
 .app {
-  width: 100vw;
-  min-height: var(--viewport-h);
+  aspect-ratio: 9 / 16;
   height: var(--viewport-h);
+  max-width: 100vw;
   background: var(--green);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   font-family: inherit;
+  position: relative;
+  border-radius: 0;
+  container-type: inline-size;
+}
+
+/* When viewport is too wide for 9:16, cap by height and derive width */
+@media (min-aspect-ratio: 9/16) {
+  .app {
+    height: var(--viewport-h);
+    width: auto;
+  }
+}
+
+/* When viewport is taller than 9:16, cap by width and derive height */
+@media (max-aspect-ratio: 9/16) {
+  .app {
+    width: 100vw;
+    height: auto;
+  }
 }
 
 /* ---- Screens ---- */
 
 .screen {
   width: 100%;
-  max-width: 480px;
-  height: var(--viewport-h);
-  padding: 60px 32px 40px;
+  max-width: 85%;
+  height: 100%;
+  padding: 8cqw 8.5cqw 6cqw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,7 +43,7 @@
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 /* ---- Transitions ---- */
@@ -38,20 +57,20 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+  from { opacity: 0; transform: translateX(-50%) translateY(3.2cqw); }
   to   { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
 @keyframes fadeOut {
   from { opacity: 1; transform: translateX(-50%) translateY(0); }
-  to   { opacity: 0; transform: translateX(-50%) translateY(-12px); }
+  to   { opacity: 0; transform: translateX(-50%) translateY(-3.2cqw); }
 }
 
 /* ---- Welcome ---- */
 
 .welcome-screen {
   justify-content: center;
-  gap: 60px;
+  gap: 10cqw;
 }
 
 .welcome-content {
@@ -59,15 +78,15 @@
 }
 
 .uber-logo {
-  font-size: 80px;
+  font-size: 18cqw;
   font-weight: 900;
   line-height: 0.95;
   color: var(--black);
-  margin-bottom: 40px;
+  margin-bottom: 6cqw;
 }
 
 .welcome-tagline {
-  font-size: 32px;
+  font-size: 7cqw;
   font-weight: 700;
   line-height: 1.2;
   color: var(--black);
@@ -77,9 +96,9 @@
   background: var(--black);
   color: var(--white);
   border: none;
-  border-radius: var(--pill-radius);
-  padding: 18px 48px;
-  font-size: 20px;
+  border-radius: 13.3cqw;
+  padding: 3.5cqw 10cqw;
+  font-size: 4.5cqw;
   font-weight: 700;
   font-family: inherit;
   cursor: pointer;
@@ -94,11 +113,11 @@
 
 .pick-screen {
   justify-content: center;
-  gap: 32px;
+  gap: 5cqw;
 }
 
 .pick-title {
-  font-size: 28px;
+  font-size: 6cqw;
   font-weight: 700;
   color: var(--black);
   text-align: center;
@@ -107,7 +126,7 @@
 .pick-options {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 3cqw;
   width: 100%;
 }
 
@@ -115,24 +134,24 @@
 
 .question-screen {
   justify-content: center;
-  gap: 24px;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  gap: 3cqw;
+  padding-top: 6cqw;
+  padding-bottom: 6cqw;
 }
 
 .question-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 3cqw;
   width: 100%;
 }
 
 .question-title {
-  font-size: 26px;
+  font-size: 4.5cqw;
   font-weight: 700;
   font-style: italic;
-  line-height: 1.25;
+  line-height: 1.2;
   color: var(--black);
   text-align: left;
   width: 100%;
@@ -141,21 +160,21 @@
 .option-grid {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 2cqw;
   width: 100%;
-  margin-top: 8px;
+  margin-top: 1cqw;
 }
 
 .option-card {
   background: var(--white);
   border: none;
-  border-radius: var(--card-radius);
-  padding: 20px 24px;
+  border-radius: 3cqw;
+  padding: 3cqw 4cqw;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 3cqw;
   text-align: left;
-  font-size: 18px;
+  font-size: 3.5cqw;
   font-weight: 500;
   font-family: inherit;
   color: var(--black);
@@ -175,7 +194,7 @@
 .option-letter {
   font-weight: 600;
   flex-shrink: 0;
-  min-width: 28px;
+  min-width: 5cqw;
 }
 
 .option-text {
@@ -186,39 +205,37 @@
 
 .timer-bar {
   width: 60%;
-  height: 6px;
+  height: 1.2cqw;
   background: rgba(0, 0, 0, 0.15);
-  border-radius: 3px;
+  border-radius: 0.6cqw;
   overflow: hidden;
-  margin-top: 16px;
+  margin-top: 2cqw;
   flex-shrink: 0;
 }
 
 .timer-fill {
   display: block;
-  width: 100%;
   height: 100%;
   background: var(--black);
-  border-radius: 3px;
-  transform-origin: right;
+  border-radius: 0.6cqw;
   animation: timerShrink 30s linear forwards;
 }
 
 @keyframes timerShrink {
-  from { transform: scaleX(1); }
-  to   { transform: scaleX(0); }
+  from { width: 100%; }
+  to   { width: 0%; }
 }
 
 /* ---- Results ---- */
 
 .results-screen {
   justify-content: center;
-  gap: 20px;
+  gap: 3cqw;
 }
 
 .results-score-circle {
-  width: 64px;
-  height: 64px;
+  width: 12cqw;
+  height: 12cqw;
   border-radius: 50%;
   background: var(--black);
   display: flex;
@@ -228,14 +245,14 @@
 }
 
 .results-score-number {
-  font-size: 28px;
+  font-size: 5.5cqw;
   font-weight: 900;
   color: var(--white);
   line-height: 1;
 }
 
 .results-title {
-  font-size: 24px;
+  font-size: 4.5cqw;
   font-weight: 700;
   font-style: italic;
   line-height: 1.25;
@@ -246,19 +263,19 @@
 .results-answers {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 2cqw;
   width: 100%;
 }
 
 .result-card {
   width: 100%;
-  padding: 18px 24px;
-  border-radius: var(--card-radius);
-  font-size: 16px;
+  padding: 3cqw 4cqw;
+  border-radius: 3cqw;
+  font-size: 3.2cqw;
   font-weight: 600;
   font-family: inherit;
   color: var(--black);
-  border-left: 5px solid transparent;
+  border-left: 1cqw solid transparent;
 }
 
 .result-correct {
@@ -277,8 +294,8 @@
 }
 
 .submit-arrow {
-  width: 56px;
-  height: 56px;
+  width: 11cqw;
+  height: 11cqw;
   border-radius: 0;
   background: none;
   border: none;
@@ -286,7 +303,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 8px;
+  margin-top: 1cqw;
   transition: opacity 0.2s;
 }
 
@@ -295,11 +312,11 @@
 }
 
 .legal-text {
-  font-size: 11px;
-  line-height: 1.4;
+  font-size: 2.2cqw;
+  line-height: 1.3;
   color: var(--black);
   text-align: center;
-  margin-top: auto;
-  padding: 0 8px;
+  margin-top: 1cqw;
+  padding: 0 2cqw;
   opacity: 0.8;
 }

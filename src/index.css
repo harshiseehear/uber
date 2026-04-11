@@ -19,7 +19,7 @@
   font-weight: 500;
   line-height: 1.4;
   color: #000000;
-  background-color: #06C167;
+  background-color: var(--white);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -48,6 +48,11 @@
 
 body {
   margin: 0;
-  background: var(--green);
+  background: var(--white);
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: var(--viewport-h);
 }
