@@ -6,7 +6,7 @@ const SHEETS_WEB_APP_URL = import.meta.env.VITE_SHEETS_WEB_APP_URL || ''
 const QUESTION_SETS = {
   1: {
     q1: {
-      title: 'En quelle année les Canadiens de Montréal ont-ils été fondés??',
+      title: 'En quelle année les Canadiens de Montréal ont-ils été fondés?',
       options: [
         { value: 'A', label: '1906' },
         { value: 'B', label: '1909' },
@@ -58,7 +58,7 @@ const QUESTION_SETS = {
   },
   2: {
     q1: {
-      title: "Les Canadiens sont l'équipe de la LNH qui a remporté le plus de coupes Stanley. Combien en ont-ils remporté??",
+      title: "Les Canadiens sont l'équipe de la LNH qui a remporté le plus de coupes Stanley. Combien en ont-ils remporté?",
       options: [
         { value: 'A', label: '18' },
         { value: 'B', label: '32' },
@@ -222,16 +222,15 @@ function App() {
 
   // Auto-reset timer for questions, score, and form screens
   useEffect(() => {
-    if (step === 'welcome' || step === 'pickSet') return
+    if (step === 'welcome') return
     clearTimers()
     setTimerKey((k) => k + 1)
     autoResetRef.current = setTimeout(resetToWelcome, 30000)
     return clearTimers
   }, [step, clearTimers, resetToWelcome])
 
-  const handleStart = () => transitionTo('pickSet')
-
-  const handlePickSet = (setNum) => {
+  const handleStart = () => {
+    const setNum = Math.floor(Math.random() * 3) + 1
     setSelectedSet(setNum)
     setAnswers({})
     transitionTo('q1')
@@ -281,25 +280,11 @@ function App() {
         </section>
       )}
 
-      {/* SET PICKER */}
-      {step === 'pickSet' && (
-        <section className={`screen pick-screen ${isFadingOut ? 'fade-out' : 'fade-in'}`}>
-          <h2 className="pick-title">Choisis un ensemble de questions</h2>
-          <div className="pick-options">
-            {[1, 2, 3].map((n) => (
-              <button key={n} className="option-card" onClick={() => handlePickSet(n)}>
-                Set {n}
-              </button>
-            ))}
-          </div>
-        </section>
-      )}
-
       {/* QUESTIONS */}
       {currentQuestion && (
         <section className={`screen question-screen ${isFadingOut ? 'fade-out' : 'fade-in'}`} key={step}>
           <div className="question-content">
-            <h2 className="question-title">Q{questionNumber}: {currentQuestion.title}</h2>
+            <h2 className={`question-title${currentQuestion.title.length > 110 ? ' question-title-sm' : ''}`}>Q{questionNumber}: {currentQuestion.title}</h2>
             <div className="option-grid">
               {currentQuestion.options.map((opt, i) => (
                 <button
@@ -308,7 +293,7 @@ function App() {
                   onClick={() => handleAnswer(step, opt.value)}
                 >
                   <span className="option-letter">{String.fromCharCode(65 + i)})</span>
-                  <span className="option-text">{opt.label}</span>
+                  <span className={`option-text${opt.label.length > 35 ? ' option-text-sm' : ''}`}>{opt.label}</span>
                 </button>
               ))}
             </div>
@@ -326,7 +311,7 @@ function App() {
             <span className="results-score-number">{score}</span>
           </div>
           <h2 className="results-title">
-            Merci d'avoir joué et prépare-toi à gagner presque presque tout.
+            Prépare-toi à gagner presque presque tout.
           </h2>
           <div className="results-answers">
             {QUESTION_KEYS.map((qk) => {
