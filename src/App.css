@@ -33,7 +33,7 @@
 
 .screen {
   width: 100%;
-  max-width: 85%;
+  max-width: 80%;
   height: 100%;
   padding: 8cqw 3.5cqw 6cqw;
   display: flex;
@@ -106,7 +106,7 @@
   border-radius: 3cqw;
   padding: 3.8cqw 4cqw;
   font-size: 4.2cqw;
-  font-weight: 500;
+  font-weight: 700;
   font-family: inherit;
   cursor: pointer;
   transition: background 0.15s, transform 0.1s;
@@ -157,7 +157,7 @@
 }
 
 .question-title {
-  font-size: 6cqw;
+  font-size: 8cqw;
   font-weight: 700;
   font-style: italic;
   line-height: 1.2;
@@ -166,10 +166,14 @@
   width: 100%;
 }
 
+.question-title-sm {
+  font-size: 6cqw;
+}
+
 .option-grid {
   display: flex;
   flex-direction: column;
-  gap: 2cqw;
+  gap: 3cqw;
   width: 100%;
   margin-top: 1cqw;
 }
@@ -178,13 +182,13 @@
   background: var(--white);
   border: none;
   border-radius: 3cqw;
-  padding: 3.8cqw 4cqw;
+  padding: 4.8cqw 4cqw;
   display: flex;
   align-items: center;
   gap: 3cqw;
   text-align: left;
-  font-size: 4.2cqw;
-  font-weight: 500;
+  font-size: 4.5cqw;
+  font-weight: 600;
   font-family: inherit;
   color: var(--black);
   cursor: pointer;
@@ -208,6 +212,10 @@
 
 .option-text {
   flex: 1;
+}
+
+.option-text-sm {
+  font-size: 3.6cqw;
 }
 
 /* ---- Timer Bar ---- */
@@ -261,7 +269,7 @@
 }
 
 .results-title {
-  font-size: 4.5cqw;
+  font-size: 8cqw;
   font-weight: 700;
   font-style: italic;
   line-height: 1.25;
