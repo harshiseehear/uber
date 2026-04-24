@@ -237,23 +237,28 @@ function App() {
   }
 
   const handleAnswer = (questionId, value) => {
-    setAnswers((prev) => ({ ...prev, [questionId]: value }))
+    const nextAnswers = { ...answers, [questionId]: value }
+    setAnswers(nextAnswers)
     const idx = QUESTION_KEYS.indexOf(questionId)
     if (idx < QUESTION_KEYS.length - 1) {
       transitionTo(QUESTION_KEYS[idx + 1])
     } else {
+      const finalScore = QUESTION_KEYS.reduce(
+        (s, qk) => s + (nextAnswers[qk] === questions[qk].correct ? 1 : 0),
+        0
+      )
+      const data = {
+        datetimestamp: new Date().toISOString(),
+        set: selectedSet,
+        ...Object.fromEntries(QUESTION_KEYS.map((qk) => [qk, nextAnswers[qk] || ''])),
+        score: finalScore,
+      }
+      sendToGoogleSheet(data)
       transitionTo('results')
     }
   }
 
   const handleResultsSubmit = () => {
-    const data = {
-      datetimestamp: new Date().toISOString(),
-      set: selectedSet,
-      ...Object.fromEntries(QUESTION_KEYS.map((qk) => [qk, answers[qk] || ''])),
-      score,
-    }
-    sendToGoogleSheet(data)
     resetToWelcome()
   }
 
