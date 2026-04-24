@@ -249,7 +249,7 @@ function App() {
         0
       )
       const data = {
-        datetimestamp: new Date().toISOString(),
+        datetimestamp: new Date().toLocaleString('sv-SE', { timeZone: 'America/Montreal' }),
         set: selectedSet,
         ...Object.fromEntries(QUESTION_KEYS.map((qk) => [qk, nextAnswers[qk] || ''])),
         score: finalScore,
