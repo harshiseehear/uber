@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
+import uberEatsLogo from './assets/uber_eats_logo.png'
 import './App.css'
 
 const SHEETS_WEB_APP_URL = import.meta.env.VITE_SHEETS_WEB_APP_URL || ''
@@ -6,7 +7,7 @@ const SHEETS_WEB_APP_URL = import.meta.env.VITE_SHEETS_WEB_APP_URL || ''
 const QUESTION_SETS = {
   1: {
     q1: {
-      title: 'En quelle année les Canadiens de Montréal ont-ils été fondés?',
+      title: 'En quelle année les Canadiens de Montréal ont-ils été fondés ?',
       options: [
         { value: 'A', label: '1906' },
         { value: 'B', label: '1909' },
@@ -16,7 +17,7 @@ const QUESTION_SETS = {
       correct: 'B',
     },
     q2: {
-      title: 'Quelle gâterie les partisans des Canadiens ont-ils commandée plus de 50 000 fois cette saison?',
+      title: 'Quelle gâterie les partisans des Canadiens ont-ils commandée plus de 50 000 fois cette saison ?',
       options: [
         { value: 'A', label: 'Lait frappé' },
         { value: 'B', label: 'Chocolats' },
@@ -26,7 +27,7 @@ const QUESTION_SETS = {
       correct: 'D',
     },
     q3: {
-      title: "Durant les séries éliminatoires de 2025, quel trio (nourriture, produit d'épicerie et produit du quotidien) les partisans des Canadiens ont-ils commandé le plus souvent?",
+      title: "Durant les séries éliminatoires de 2025, quel trio (nourriture, produit d'épicerie et produit du quotidien) les partisans des Canadiens ont-ils commandé le plus souvent ?",
       options: [
         { value: 'A', label: 'Shawarma, œufs, papier essuie-tout' },
         { value: 'B', label: 'Burgers, bananes, assiettes' },
@@ -36,7 +37,7 @@ const QUESTION_SETS = {
       correct: 'D',
     },
     q4: {
-      title: 'En quelle année Youppi! est-il devenu la mascotte des Canadiens de Montréal?',
+      title: 'En quelle année Youppi! est-il devenu la mascotte des Canadiens de Montréal ?',
       options: [
         { value: 'A', label: '2000' },
         { value: 'B', label: '2005' },
@@ -46,7 +47,7 @@ const QUESTION_SETS = {
       correct: 'B',
     },
     q5: {
-      title: 'Durant les séries éliminatoires de 2025, les partisans des Canadiens ont commandé plus de 7000 portions de frites, ce qui correspond au :',
+      title: 'Durant les séries éliminatoires de 2025, les partisans des Canadiens ont commandé plus de 7 000 portions de frites, ce qui correspond au :',
       options: [
         { value: 'A', label: 'Nombre de mises au jeu cette saison' },
         { value: 'B', label: "Nombre de matchs de saison régulière disputés dans l'histoire de l'équipe" },
@@ -58,7 +59,7 @@ const QUESTION_SETS = {
   },
   2: {
     q1: {
-      title: "Les Canadiens sont l'équipe de la LNH qui a remporté le plus de coupes Stanley. Combien en ont-ils remporté?",
+      title: "Les Canadiens sont l'équipe de la LNH qui a remporté le plus de coupes Stanley. Combien en ont-ils remporté ?",
       options: [
         { value: 'A', label: '18' },
         { value: 'B', label: '32' },
@@ -68,17 +69,17 @@ const QUESTION_SETS = {
       correct: 'D',
     },
     q2: {
-      title: 'Au cours de cette saison, les partisans montréalais ont commandé plus de 300 000 burgers, un nombre suffisant pour :',
+      title: 'Au cours de cette saison, les partisans montréalais ont commandé plus de 300\u00a0000 burgers, un nombre suffisant pour :',
       options: [
         { value: 'A', label: 'Remplir cinq fois la patinoire du Centre Bell' },
         { value: 'B', label: 'Atteindre une hauteur correspondant à plus de 31 tours du stade olympique' },
-        { value: 'C', label: 'Correspondre au poids de 1,2 million de rondelles' },
+        { value: 'C', label: 'Correspondre au poids de 1,2 million de rondelles' },
         { value: 'D', label: 'Couvrir toute la longueur de la ligne orange du métro' },
       ],
       correct: 'B',
     },
     q3: {
-      title: 'Les soirs où les Canadiens jouent, lequel de ces aliments a été commandé plus de 450 000 fois au cours des deux dernières saisons?',
+      title: 'Les soirs où les Canadiens jouent, lequel de ces aliments a été commandé plus de 450 000 fois au cours des deux dernières saisons ?',
       options: [
         { value: 'A', label: 'Maïs soufflé' },
         { value: 'B', label: 'Frites' },
@@ -88,7 +89,7 @@ const QUESTION_SETS = {
       correct: 'C',
     },
     q4: {
-      title: "Quel entraîneur-chef des Canadiens a mené l'équipe à la conquête de cinq coupes Stanley consécutives entre 1956 et 1960?",
+      title: "Quel entraîneur-chef des Canadiens a mené l'équipe à la conquête de cinq coupes Stanley consécutives entre 1956 et 1960 ?",
       options: [
         { value: 'A', label: 'Toe Blake' },
         { value: 'B', label: 'Scotty Bowman' },
@@ -98,7 +99,7 @@ const QUESTION_SETS = {
       correct: 'A',
     },
     q5: {
-      title: 'Durant la saison dernière, les partisans des Canadiens ont commandé plus de 150 000 pizzas, un nombre suffisant pour :',
+      title: 'Durant la saison dernière, les partisans des Canadiens ont commandé plus de 150 000 pizzas, un nombre suffisant pour :',
       options: [
         { value: 'A', label: 'Parcourir 50 fois la distance entre le Centre Bell et le Vieux-Port' },
         { value: 'B', label: 'Faire 18 fois le tour de la patinoire du Centre Bell' },
@@ -110,7 +111,7 @@ const QUESTION_SETS = {
   },
   3: {
     q1: {
-      title: 'Avant le Centre Bell, dans quel aréna les Canadiens ont-ils joué pendant des décennies?',
+      title: 'Avant le Centre Bell, dans quel aréna les Canadiens ont-ils joué pendant des décennies ?',
       options: [
         { value: 'A', label: 'Forum de Montréal' },
         { value: 'B', label: 'Centre Molson' },
@@ -120,7 +121,7 @@ const QUESTION_SETS = {
       correct: 'A',
     },
     q2: {
-      title: "Durant les séries éliminatoires de 2025, les partisans des Canadiens ont passé 3000 commandes d'ailes de poulet, un nombre qui correspond au :",
+      title: "Durant les séries éliminatoires de 2025, les partisans des Canadiens ont passé 3 000 commandes d'ailes de poulet, un nombre qui correspond au :",
       options: [
         { value: 'A', label: 'Nombre de secondes dans une période de prolongation en séries éliminatoires' },
         { value: 'B', label: 'Nombre total de minutes en supériorité numérique' },
@@ -130,7 +131,7 @@ const QUESTION_SETS = {
       correct: 'A',
     },
     q3: {
-      title: 'La saison dernière, les partisans des Canadiens ont commandé suffisamment de hot-dogs pour parcourir la distance qui sépare le Centre Bell de quel site emblématique de Montréal?',
+      title: 'La saison dernière, les partisans des Canadiens ont commandé suffisamment de hot-dogs pour parcourir la distance qui sépare le Centre Bell de quel site emblématique de Montréal ?',
       options: [
         { value: 'A', label: 'La basilique Notre-Dame' },
         { value: 'B', label: "Schwartz's Deli sur le boulevard Saint-Laurent (aussi appelé la « Main »)" },
@@ -140,7 +141,7 @@ const QUESTION_SETS = {
       correct: 'B',
     },
     q4: {
-      title: 'Le célèbre « Big Three » de la défense des Canadiens dans les années 1970 était composé de Serge Savard, Guy Lapointe et de quel autre défenseur?',
+      title: 'Le célèbre « Big Three » de la défense des Canadiens dans les années 1970 était composé de Serge Savard, Guy Lapointe et de quel autre défenseur ?',
       options: [
         { value: 'A', label: 'Larry Robinson' },
         { value: 'B', label: 'Rod Langway' },
@@ -150,12 +151,12 @@ const QUESTION_SETS = {
       correct: 'A',
     },
     q5: {
-      title: 'Durant les séries éliminatoires de 2025, les partisans des Canadiens ont commandé beaucoup de poutines. Combien de surfaceuses à glace la sauce de ces poutines pourrait-elle remplir?',
+      title: 'Durant les séries éliminatoires de 2025, les partisans des Canadiens ont commandé beaucoup de poutines. Combien de surfaceuses à glace la sauce de ces poutines pourrait-elle remplir ?',
       options: [
         { value: 'A', label: '1 resurfaceuse' },
-        { value: 'B', label: '3 resurfaceuse' },
-        { value: 'C', label: '7 resurfaceuse' },
-        { value: 'D', label: '12 resurfaceuse' },
+        { value: 'B', label: '3 resurfaceuses' },
+        { value: 'C', label: '7 resurfaceuses' },
+        { value: 'D', label: '12 resurfaceuses' },
       ],
       correct: 'B',
     },
@@ -271,16 +272,16 @@ function App() {
       {step === 'welcome' && (
         <section className={`screen welcome-screen ${isFadingOut ? 'fade-out' : 'fade-in'}`}>
           <div className="welcome-content">
-            <h1 className="uber-logo"><span className="uber-text">Uber</span><br /><span className="eats-text">Eats</span></h1>
+            <img src={uberEatsLogo} alt="Uber Eats" className="uber-logo-img" />
             <p className="welcome-tagline">
-              Réponds aux<br />
+              Répondez aux<br />
               questions.<br />
-              Gagne presque<br />
+              Gagnez presque<br />
               presque tout.
             </p>
           </div>
           <button className="cta-button" onClick={handleStart}>
-            Joue maintenant
+            Jouez maintenant
           </button>
         </section>
       )}
@@ -316,7 +317,7 @@ function App() {
             <span className="results-score-number">{score}</span>
           </div>
           <h2 className="results-title">
-            Prépare-toi à gagner presque presque tout.
+            Préparez-vous à gagner presque presque tout.
           </h2>
           <div className="results-answers">
             {QUESTION_KEYS.map((qk) => {
